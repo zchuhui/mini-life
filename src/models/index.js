@@ -6,9 +6,10 @@ export default {
   namespace: 'index',
 
   state: {
-    weather: {},
-    title: 'hello world',
-    carousel: {
+    /* weather: {}, */
+    title: 'Hello',
+    date:'1990-05-06',
+    /* carousel: {
       indicatorDots: true,  //显示面板指示点
       autoplay: true,     //自动切换
       interval: 2000,    //自动切换时间间隔
@@ -21,8 +22,7 @@ export default {
       }, {
         imgUrl: "http://imgcdnali.ylallinone.com/pcImg/2017-05-03/14937842759450.jpg",
       }],
-    },
-
+    }, */
   },
 
   reducers: {
@@ -48,6 +48,10 @@ export default {
         ...state,
         userInfo,
       };
+    },
+
+    saveDateSuccess(state, action) { 
+      return {...state,date:action.payload.value}
     }
   },
 
@@ -66,15 +70,19 @@ export default {
     },
 
     *onTapCarousel(action, { select }) {
-      console.log(action);
       const { pic } = action.payload;
       const { carousel } = yield select(state => state.index);
       const pics = carousel.images.map(img => img.imgUrl);
       wx.previewImage({
-        current: pic.imgUrl, // 当前显示图片的http链接
-        urls: pics,// 需要预览的图片http链接列表
+        current: pic.imgUrl,  // 当前显示图片的http链接
+        urls: pics,           // 需要预览的图片http链接列表
       });
     },
+
+    *bindDateChange(action, { put }) {
+      const { value } = action.payload;
+      yield put({type:'saveDateSuccess', payload:{value}})
+    },  
 
     *watchLocation(action, { put, take, select, takeEvery }) {
       let { location } = yield select(state => state.app );
@@ -87,7 +95,7 @@ export default {
         yield put({ type: 'getLocationSuccess', payload: { location } });
       }
     },
-
+    
     *watchLogin(action, { call, put, take, select, takeEvery }) {
       let { userInfo } = yield select(state => state.app );
 
@@ -95,6 +103,7 @@ export default {
         const action1 = yield take('app/getUserInfoSuccess');
         userInfo = action1.payload.userInfo;
       }
+
       yield put({ type: 'getUserInfoSuccess', payload: { userInfo } });
 
     }

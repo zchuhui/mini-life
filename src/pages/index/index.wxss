@@ -1,6 +1,16 @@
 
+.container{
+  font-size: 28rpx;
+
+  .hello{
+    margin-top:20px;
+  }
+  .section{
+    margin-top: 40rpx;
+  }
+}
+
 .indexTitle {
-  background-color: red;
   margin-top: 20rpx;
 }
 

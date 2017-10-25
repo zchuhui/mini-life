@@ -1,0 +1,3 @@
+<template name="pickerT">
+    <include src="picker.wxml" />
+</template>

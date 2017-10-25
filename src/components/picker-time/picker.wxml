@@ -1,0 +1,24 @@
+<!-- <swiper 
+  indicator-dots="{{true}}" 
+  circular="{{true}}"
+  autoplay="{{carousel.autoplay}}"
+  interval="{{carousel.interval||2000}}"
+  duration="{{carousel.duration||1000}}"
+  style="width:100%;height: {{carousel.height||285}}rpx"
+  wx:if="{{ carousel.images.length > 0 }}"
+  >
+  <block wx:for="{{carousel.images}}" wx:key="{{index}}">
+    <swiper-item wx:if="{{ item.imgUrl }}">
+      <image style="width: 750rpx; height: {{height||285}}rpx" ontap="onTapCarouselItem" data-pic="{{item}}" src="{{item.imgUrl}}" class="carousel-slideImage" />
+    </swiper-item>
+  </block>
+</swiper>
+ -->
+
+<view class="section">
+  <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+    <view class="picker">
+      选择您的生日: {{date}}
+    </view>
+  </picker>
+</view>
