@@ -1,28 +1,16 @@
 import api from '../utils/api/api.js';
 import wx from '../utils/wx.js';
+import moment from 'moment';
 import { isEmpty } from 'lodash';
 
 export default {
   namespace: 'index',
 
   state: {
-    /* weather: {}, */
     title: 'Hello',
-    date:'1990-05-06',
-    /* carousel: {
-      indicatorDots: true,  //显示面板指示点
-      autoplay: true,     //自动切换
-      interval: 2000,    //自动切换时间间隔
-      duration: 1000,    //滑动动画时长
-      height: 200,
-      images: [{
-        imgUrl: "http://imgcdnali.ylallinone.com/pcImg/2017-05-03/14937842648526.jpg",
-      }, {
-        imgUrl: "http://imgcdnali.ylallinone.com/pcImg/2017-05-03/14937842684646.jpg",
-      }, {
-        imgUrl: "http://imgcdnali.ylallinone.com/pcImg/2017-05-03/14937842759450.jpg",
-      }],
-    }, */
+    date: null,
+    quantity:100,
+    waste:0,
   },
 
   reducers: {
@@ -51,7 +39,39 @@ export default {
     },
 
     saveDateSuccess(state, action) { 
-      return {...state,date:action.payload.value}
+      // 生日
+      const birthday = action.payload.value;
+      // 今天
+      const today = moment().format('YYYY-MM-DD');
+      // 平均寿命天数
+      const life = 75.99 * 365;
+      // 你已经活了多少天
+      const dayCount = compareDate(birthday,today);
+      // 剩下电量
+      const quantity = ((life-dayCount)/life * 100).toFixed(2);
+      // 已耗费
+      const waste = (dayCount/life*100).toFixed(2);
+
+      function compareDate(start,end){ 
+        if(start==null||start.length==0||end==null||end.length==0){ 
+            return 0; 
+        }
+         
+        var arr=start.split("-");  
+        var starttime=new Date(arr[0],parseInt(arr[1]-1),arr[2]);  
+        var starttimes=starttime.getTime(); 
+         
+        var arrs=end.split("-");  
+        var endtime=new Date(arrs[0],parseInt(arrs[1]-1),arrs[2]);  
+        var endtimes=endtime.getTime(); 
+         
+        var intervalTime = endtimes-starttimes;//两个日期相差的毫秒数 一天86400000毫秒 
+        var Inter_Days = ((intervalTime).toFixed(2)/86400000)+1;//加1，是让同一天的两个日期返回一天 
+         
+        return Inter_Days; 
+      }; 
+
+      return {...state,date:birthday,quantity:quantity,waste:waste}
     }
   },
 
@@ -117,7 +137,7 @@ export default {
 
     //监控位置变化
     watchLocation({ dispatch }) {
-      dispatch({ type: 'watchLocation' });
+      //dispatch({ type: 'watchLocation' });
     }
   }
 }

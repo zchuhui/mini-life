@@ -18,6 +18,7 @@ export default {
     },
     getUserInfoSuccess(state, action) {
       const { userInfo } = action.payload;
+      console.log(userInfo);
       return { ...state, userInfo };
     }
   },

@@ -2,19 +2,65 @@
 .container{
   font-size: 28rpx;
 
-  .hello{
-    margin-top:20px;
-  }
-  .section{
-    margin-top: 40rpx;
-  }
-}
+  .green{color:#39dd5c;}
+  .gray{color:#757575;}
+  
+  .userInfo{
+    text-align: center;
+    margin:20rpx auto;
+    line-height: 60rpx;
 
-.indexTitle {
-  margin-top: 20rpx;
-}
+    image{
+      width:100rpx;
+      height:100rpx;
+      border-radius: 50%;
+    }
+  }
 
-.indexButton {
-  width: 100%;
-  margin-top: 20rpx;
+  .birthday{
+    margin:20rpx auto;
+  }
+
+  .batteryContainer{
+    display: inline-block;
+    width:40%;
+    height:500rpx;
+    margin:30rpx auto;
+    border:1px solid #39dd5c;
+    border-radius: 10rpx;
+    text-align: center;
+
+    .battery{
+      position: relative;
+      display: block;
+      height: 93%;
+      margin: 5% 5%;
+
+      .value{
+        position: absolute;
+        bottom: 0;
+        left:0;
+        width:100%;
+        height:90%;
+        background: #39dd5c;
+
+      }
+    }
+
+    .batteryHead{
+      float: left;
+      display:inline-block;
+      width:50%;
+      height:40rpx;
+      margin-top:-40rpx;
+      margin-left:25%;
+      background: #39dd5c;
+    }
+  }
+  
+
+  .textContainer{
+    text-align: center;
+    line-height: 50rpx;
+  }
 }

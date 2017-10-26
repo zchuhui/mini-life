@@ -16,9 +16,9 @@
  -->
 
 <view class="section">
-  <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+  <picker mode="date" value="{{date}}" bindchange="bindDateChange">
     <view class="picker">
-      选择您的生日: {{date}}
+        <button type="default" size="{{default}}" style="font-size:26rpx;">{{date !==null ? '您的生日：'+date :'点击设置您的生日'}}</button>
     </view>
   </picker>
 </view>
